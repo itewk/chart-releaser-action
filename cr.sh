@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -x
 set -o errexit
 set -o nounset
 set -o pipefail
@@ -239,8 +240,13 @@ package_chart() {
         args+=(--config "$config")
     fi
 
+    echo "DEBUG 0"
+    helm version
+    cr version
+    echo "DEBUG 1"
     echo "Packaging chart '$chart'..."
     cr package "${args[@]}"
+    echo "DEBUG 0"
 }
 
 release_charts() {
